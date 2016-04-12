@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-lazy-init="true" default-autowire="byName">
+
+	<bean id="segmentWordServiceMmseg" init-method="init"
+		class="jalimay.cn.nlp.service.segmentation.chinese.SegmentWordServiceByMmseg4j">
+		<property name="dic" value="classpath:/dict/mmseg"></property>
+	</bean>
+
+	<bean id="classifyWordServiceByRBM" init-method="load"
+		class="jalimay.cn.nlp.service.classification.word2vec.ClassifyWordServiceByRBM">
+	</bean>
+
+	<bean id="vectorWord" init-method="init"
+		class="jalimay.cn.nlp.service.classification.word2vec.VectorWord">
+		<property name="dic"
+			value="classpath:/dict/product_name.dic"></property>
+	</bean>
+
+	<bean id="trainRBM" class="jalimay.cn.nlp.service.classification.word2vec.TrainRBM">
+		<property name="vectorWord" ref="vectorWord"></property>
+		<property name="data"
+			value="classpath:/dict/product_name_word.txt"></property>
+		<property name="trainedModel" value="classpath:/RBM/RBM.bin"></property>
+	</bean>
+</beans>

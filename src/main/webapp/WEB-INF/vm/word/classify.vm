@@ -1,0 +1,9 @@
+<h3>系统计算出的 [$!{word}] 的词性概率</h3>
+<ul>
+	#foreach($class in $classMap.entrySet())
+	<li class="btn btn-info" style="margin: 2px;">
+		<span>$class.key</span>
+		<span class="badge">$!{numberTool.format("#0.000", $class.value)}</span>
+	</li>
+	#end
+</ul>
