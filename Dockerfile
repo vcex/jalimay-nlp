@@ -1,12 +1,11 @@
 FROM tomcat:7-jre7
 FROM maven:3-jdk-7
 
-RUN pwd
-RUN ls
+COPY tomcat-users.xml $CATALINA_HOME/conf
+COPY pom.xml /home/jalimay-nlp
+COPY src/ /home/jalimay-nlp
 
-WORKDIR /jalimay/jalimay-nlp/
-
-RUN cp tomcat-users.xml $CATALINA_HOME/conf
+WORKDIR /home/jalimay-nlp
 
 RUN mvn package -Dmaven.test.skip=true
 
