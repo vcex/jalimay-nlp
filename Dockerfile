@@ -2,6 +2,9 @@ FROM tomcat:7-jre7
 FROM maven:3-jdk-7
 
 COPY tomcat-users.xml $CATALINA_HOME/conf
+
+RUN mkdir /home/jalimay-nlp
+
 COPY pom.xml /home/jalimay-nlp
 COPY src/ /home/jalimay-nlp
 
